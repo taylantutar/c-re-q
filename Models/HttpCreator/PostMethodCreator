@@ -1,0 +1,4 @@
+namespace c_re_q.Models.HttpCreator
+{
+    public class PostMethodCreator { }
+}
