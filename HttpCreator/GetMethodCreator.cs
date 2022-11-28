@@ -1,4 +1,7 @@
-namespace c_re_q.Models.HttpCreator
+using System.Text.Json;
+using c_re_q.Models;
+
+namespace c_re_q.HttpCreator
 {
     public class GetMethodCreator
     {
@@ -24,6 +27,13 @@ namespace c_re_q.Models.HttpCreator
         private string GetBaseAddress()
         {
             return "https://jsonplaceholder.typicode.com";
+        }
+
+        public List<Todo> GetTodos()
+        {
+            var content = this.MakeRequest().GetAwaiter().GetResult();
+
+            return JsonSerializer.Deserialize<List<Todo>>(content);
         }
     }
 }

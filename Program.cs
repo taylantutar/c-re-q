@@ -1,13 +1,17 @@
-﻿using c_re_q.Models.HttpCreator;
-using System;
+﻿using c_re_q.HttpCreator;
+using System.Linq;
 
 var getMethodCreator = new GetMethodCreator();
 
 try
 {
-    var res = await getMethodCreator.MakeRequest();
+    var todos = getMethodCreator.GetTodos();
 
-    Console.WriteLine(res);
+    Console.WriteLine(todos.First().title);
+}
+catch (HttpRequestException e)
+{
+    Console.WriteLine(e.Message);
 }
 catch (Exception e)
 {
