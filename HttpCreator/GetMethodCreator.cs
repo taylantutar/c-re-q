@@ -34,6 +34,7 @@ namespace c_re_q.HttpCreator
             var content = this.MakeRequest().GetAwaiter().GetResult();
 
             return JsonSerializer.Deserialize<List<Todo>>(content);
+
         }
     }
 }

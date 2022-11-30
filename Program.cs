@@ -2,18 +2,13 @@
 using System.Linq;
 
 var getMethodCreator = new GetMethodCreator();
+var todos = getMethodCreator.GetTodos();
+Console.WriteLine(todos.First().title);
 
-try
-{
-    var todos = getMethodCreator.GetTodos();
+System.Console.WriteLine("******************************");
 
-    Console.WriteLine(todos.First().title);
-}
-catch (HttpRequestException e)
-{
-    Console.WriteLine(e.Message);
-}
-catch (Exception e)
-{
-    Console.WriteLine(e.Message);
-}
+var postMethodCreator = new PostMethodCreator();
+var newTodo = postMethodCreator.PostTodo();
+System.Console.WriteLine(newTodo.id);
+System.Console.WriteLine(newTodo.title);
+
