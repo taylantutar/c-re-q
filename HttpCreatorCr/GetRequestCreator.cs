@@ -4,7 +4,7 @@ namespace c_re_q.HttpCreatorCr
 {
     public class GetRequestCreator<T> : BaseRequestCreator where T : class
     {
-        public  List<T> MakeRequest()
+        public List<T> MakeRequest()
         {
             HttpClient client = new();
             client.BaseAddress = new Uri(base.BaseAddress);
@@ -15,7 +15,6 @@ namespace c_re_q.HttpCreatorCr
             var res = JsonSerializer.Deserialize<List<T>>(jsonString);
 
             return res;
-
         }
     }
 }
