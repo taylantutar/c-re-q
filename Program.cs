@@ -14,8 +14,11 @@ using System.Linq;
 
 
 
-var putMethodCreator = new PutMethodCreator();
-putMethodCreator.MakeRequest();
+// var putMethodCreator = new PutMethodCreator();
+// putMethodCreator.MakeRequest();
+
+var deleteMethodCreator = new DeleteMethodCreator();
+deleteMethodCreator.MakeRequest();
 
 
 
