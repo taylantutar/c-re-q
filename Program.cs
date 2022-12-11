@@ -14,3 +14,8 @@ using System.Linq;
 
 
 
+var putMethodCreator = new PutMethodCreator();
+putMethodCreator.MakeRequest();
+
+
+
