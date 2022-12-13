@@ -8,23 +8,14 @@ namespace c_re_q.HttpCreatorCr
 {
     public class RequestCreator
     {
-        public BaseRequestCreator BaseRequestCreator { get; set; }
-        public RequestCreator(Action<HttpClientModel> action)
+        public HttpClientModel HttpClientModel { get; set; } = new();
+
+        public RequestCreator Configure(Action<HttpClientModel> action)
         {
             HttpClientModel model = new();
             action.Invoke(model);
 
-            BaseRequestCreator = new BaseRequestCreator
-            {
-                BaseAddress = model.BaseAddress,
-                HttpMethod = model.HttpMethod,
-                UrlPath = model.UrlPath
-            };
-        }
-
-        public void Create()
-        {
-
+            return this;
         }
     }
 }

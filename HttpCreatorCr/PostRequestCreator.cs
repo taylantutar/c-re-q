@@ -1,9 +1,10 @@
 using System.Text;
 using System.Text.Json;
+using c_re_q.Models;
 
 namespace c_re_q.HttpCreatorCr
 {
-    public class PostRequestCreator<T> : BaseRequestCreator where T : class
+    public class PostRequestCreator<T>
     {
         public object Data { get; set; }
 
@@ -12,20 +13,20 @@ namespace c_re_q.HttpCreatorCr
             this.Data = Data;
         }
 
-        public T MakeRequest()
+        public Todo MakeRequest()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(base.BaseAddress);
+            client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
 
             var jsonData = JsonSerializer.Serialize(Data);
             var stringData = new StringContent(jsonData, encoding: Encoding.UTF8, mediaType: "application/json");
 
-            var responseMessage = client.PostAsync(base.UrlPath, stringData).Result;
+            var responseMessage = client.PostAsync("todos", stringData).Result;
 
             if (responseMessage.IsSuccessStatusCode)
             {
                 var res = responseMessage.Content.ReadAsStringAsync().Result;
-                return JsonSerializer.Deserialize<T>(res);
+                return JsonSerializer.Deserialize<Todo>(res);
             }
             return null;
         }

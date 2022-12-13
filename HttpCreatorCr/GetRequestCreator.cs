@@ -1,18 +1,19 @@
 using System.Text.Json;
+using c_re_q.Models;
 
 namespace c_re_q.HttpCreatorCr
 {
-    public class GetRequestCreator<T> : BaseRequestCreator where T : class
+    public class GetRequestCreator<T>
     {
-        public List<T> MakeRequest()
+        public List<Todo> MakeRequest()
         {
             HttpClient client = new();
-            client.BaseAddress = new Uri(base.BaseAddress);
+            client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
 
-            var responseMessage = client.GetAsync(base.UrlPath).Result;
+            var responseMessage = client.GetAsync("todos").Result;
             var jsonString = responseMessage.Content.ReadAsStringAsync().Result;
 
-            var res = JsonSerializer.Deserialize<List<T>>(jsonString);
+            var res = JsonSerializer.Deserialize<List<Todo>>(jsonString);
 
             return res;
         }
