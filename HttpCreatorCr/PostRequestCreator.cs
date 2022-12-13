@@ -4,7 +4,7 @@ using c_re_q.Models;
 
 namespace c_re_q.HttpCreatorCr
 {
-    public class PostRequestCreator<T>
+    public class PostRequestCreator<T> : IRequestCreator<T>
     {
         public object Data { get; set; }
 
@@ -13,7 +13,7 @@ namespace c_re_q.HttpCreatorCr
             this.Data = Data;
         }
 
-        public Todo MakeRequest()
+        public T MakeRequest()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
@@ -26,9 +26,9 @@ namespace c_re_q.HttpCreatorCr
             if (responseMessage.IsSuccessStatusCode)
             {
                 var res = responseMessage.Content.ReadAsStringAsync().Result;
-                return JsonSerializer.Deserialize<Todo>(res);
+                return JsonSerializer.Deserialize<T>(res);
             }
-            return null;
+            return Activator.CreateInstance<T>();
         }
     }
 }
